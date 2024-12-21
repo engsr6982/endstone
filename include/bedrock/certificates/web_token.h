@@ -16,10 +16,14 @@
 
 #include "bedrock/deps/json/value.h"
 
-struct WebToken {
-    std::string header;       // +0
-    Json::Value header_info;  // +32
-    std::string data;         // +48
-    Json::Value data_info;    // +80
-    std::string signature;    // +96
+class WebToken {
+public:
+    [[nodiscard]] Json::Value const &getData() const;
+
+private:
+    std::string header_;       // +0
+    Json::Value header_info_;  // +32
+    std::string data_;         // +48
+    Json::Value data_info_;    // +80
+    std::string signature_;    // +96
 };

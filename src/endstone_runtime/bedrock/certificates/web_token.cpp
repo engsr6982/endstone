@@ -12,27 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
-
-#include <memory>
-#include <string>
-
-#include "bedrock/certificates/certificate.h"
 #include "bedrock/certificates/web_token.h"
-#include "bedrock/deps/json/value.h"
 
-class SubClientConnectionRequest {
-public:
-    [[nodiscard]] Json::Value getData(const std::string &key) const
-    {
-        if (certificate_ && raw_token_) {
-            return raw_token_->getData().get(key, Json::nullValue);
-        }
-        return Json::nullValue;
-    }
-
-private:
-    std::unique_ptr<UnverifiedCertificate> certificate_data_;  // +0
-    std::unique_ptr<Certificate> certificate_;                 // +8
-    std::unique_ptr<WebToken> raw_token_;                      // +16
-};
+Json::Value const &WebToken::getData() const
+{
+    return data_info_;
+}

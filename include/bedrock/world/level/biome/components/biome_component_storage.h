@@ -14,20 +14,13 @@
 
 #pragma once
 
-#include "bedrock/app_platform_listener.h"
-#include "bedrock/core/file/storage_area_state_listener.h"
-#include "bedrock/world/game_callbacks.h"
-#include "bedrock/world/minecraft.h"
+#include "bedrock/core/utility/type_id.h"
+#include "bedrock/world/level/biome/components/biome_component_base.h"
 
-class ServerInstance : public Bedrock::EnableNonOwnerReferences,
-                       public AppPlatformListener,
-                       public GameCallbacks,
-                       public Core::StorageAreaStateListener {
+class BiomeComponentStorage {
 public:
-    Minecraft &getMinecraft();
-
 private:
-    std::chrono::steady_clock::time_point last_sync_time_;  // +152
-    IMinecraftApp *app_;                                    // +160
-    std::unique_ptr<Minecraft> minecraft_;                  // +168
+    std::vector<std::pair<Bedrock::typeid_t<void>, std::unique_ptr<BiomeComponentBase>>> component_list_;  // +0
+    bool allow_adding_components_;                                                                         // +24
 };
+BEDROCK_STATIC_ASSERT_SIZE(BiomeComponentStorage, 32, 32);

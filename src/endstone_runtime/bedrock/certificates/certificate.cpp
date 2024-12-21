@@ -16,16 +16,16 @@
 
 Json::Value Certificate::getExtraData(const std::string &key, const Json::Value &default_value) const
 {
-    const auto extra_data = unverified_certificate_.raw_token_.data_info.get("extraData", {});
+    const auto extra_data = unverified_certificate_.raw_token_.getData().get("extraData", {});
     return extra_data.get(key, default_value);
 }
 
 bool Certificate::isValid() const
 {
-    return valid_;
+    return is_valid_;
 }
 
 bool Certificate::isSelfSigned() const
 {
-    return self_signed_;
+    return is_self_signed_;
 }
